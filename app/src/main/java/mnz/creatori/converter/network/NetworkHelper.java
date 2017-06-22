@@ -14,6 +14,8 @@ public class NetworkHelper {
     public ArrayList<String> getValuteNames() {
         //Метод должен гарантированно возвращать не null!
 
-        return null;
+        ArrayList<String> valNames = new ArrayList<>();
+        valNames.add("none");
+        return valNames;
     }
 }

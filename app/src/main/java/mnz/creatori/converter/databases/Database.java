@@ -9,7 +9,10 @@ public class Database {
         //Метод должен гарантированно возвращать не null!
 
 
-        return null;
+        ArrayList<String> valNames = new ArrayList<>();
+        valNames.add("none2");
+        valNames.add("none3");
+        return valNames;
     }
 
     public void update(ArrayList<String> valuteNames) {

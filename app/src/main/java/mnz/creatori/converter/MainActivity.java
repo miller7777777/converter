@@ -124,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void compute() {
+
+
         tvFinishCurrencySum.setText(calculator.getResult(etStartCurrencySum.getText().toString(), valStart, valFinish));
 
 
