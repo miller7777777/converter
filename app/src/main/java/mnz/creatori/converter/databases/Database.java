@@ -3,6 +3,8 @@ package mnz.creatori.converter.databases;
 
 import java.util.ArrayList;
 
+import mnz.creatori.converter.Entity.Valute;
+
 public class Database {
     public ArrayList<String> getValuteNames() {
 
@@ -15,6 +17,6 @@ public class Database {
         return valNames;
     }
 
-    public void update(ArrayList<String> valuteNames) {
+    public void update(ArrayList<Valute> valuteNames) {
     }
 }

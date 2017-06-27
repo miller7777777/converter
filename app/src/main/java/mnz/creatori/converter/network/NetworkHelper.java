@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import mnz.creatori.converter.Entity.Valute;
+import mnz.creatori.converter.databases.Database;
 import mnz.creatori.converter.parse.Parser;
 
 
@@ -43,6 +44,7 @@ public class NetworkHelper{
         }
 
         valutes = new Parser().parse(content);
+        new Database().update(valutes);
 
 
         ArrayList<String> valNames = new ArrayList<>();
