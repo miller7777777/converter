@@ -3,20 +3,18 @@ package mnz.creatori.converter.network;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import mnz.creatori.converter.Entity.Valute;
-
-import static android.R.attr.path;
-import static android.content.ContentValues.TAG;
+import mnz.creatori.converter.parse.Parser;
 
 
 //осуществляет работу с сетью, загрузку данных
@@ -25,6 +23,7 @@ public class NetworkHelper{
     private final String SOURCE_URL = "http://www.cbr.ru/scripts/XML_daily.asp";
     private final String TAG = "MyLogs";
     private String content;
+    private ArrayList<Valute> valutes;
 
 
 
@@ -37,15 +36,22 @@ public class NetworkHelper{
         dataLoader.execute(SOURCE_URL);
         try {
             content = dataLoader.get();
-            Log.d(TAG, content);
+//            Log.d(TAG, content);
 
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
+        valutes = new Parser().parse(content);
+
 
         ArrayList<String> valNames = new ArrayList<>();
-        valNames.add("none");
+
+        for (int i = 0; i < valutes.size(); i++) {
+            valNames.add(valutes.get(i).getCharCode());
+        }
+
+//        valNames.add("none");
         return valNames;
     }
 
@@ -89,13 +95,6 @@ public class NetworkHelper{
                 c.connect();
 
 
-//                String temp = c.getContentEncoding();
-//                Log.d(TAG, "Encoding: " + temp);
-
-
-//                String contentType = c.getHeaderField("Content-Type");
-//                Log.d(TAG, "Content type: " + contentType);
-
 
                 reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "windows-1251"));
                 StringBuilder buf = new StringBuilder();
@@ -107,7 +106,7 @@ public class NetworkHelper{
                 String answer = buf.toString();
 
 
-//                Log.d(TAG, "String get: " + answer);
+                Log.d(TAG, "String get: " + answer);
                 return (answer);
             } finally {
                 if (reader != null) {
@@ -118,7 +117,6 @@ public class NetworkHelper{
 
     }
 
-    //осуществляет парсинг XML
-    public class XMLHelper{
-    }
+
+
 }
