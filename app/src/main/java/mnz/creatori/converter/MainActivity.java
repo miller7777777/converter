@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         currencyStartType.setPrompt("Start Valute");
         currencyFinishType.setPrompt("Finish Valute");
 
-//        currencyStartType.setSelection(2);
-//        currencyFinishType.setSelection(2);
         final String[] finalNames = names;
         currencyStartType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -128,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void compute() {
 
+
+        calculator = new Calculator(valutes);
 
         tvFinishCurrencySum.setText(calculator.getResult(etStartCurrencySum.getText().toString(), valStart, valFinish));
 
