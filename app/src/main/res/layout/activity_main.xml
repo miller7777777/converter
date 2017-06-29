@@ -29,8 +29,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/enter_start_sum"
+            android:inputType="number"
             android:gravity="center"
-            tools:text="50000"/>
+            android:background="@drawable/edittextstyle"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            tools:text="50000"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
 
         <Spinner
             android:id="@+id/et_start_currency_type"
@@ -38,6 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
+            android:background="@drawable/edittextstyle"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             >
 
         </Spinner>
@@ -50,7 +65,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/compute"/>
+        android:background="@drawable/edittextstyle"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/compute"
+        android:textSize="36sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +86,16 @@
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp"
-            tools:text="25000"/>
+            android:background="@drawable/edittextstyle"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            tools:text="25000"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:hint="\?"
+            android:lines="1"/>
 
         <Spinner
             android:id="@+id/et_finish_currency_type"
@@ -73,6 +103,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
+            android:background="@drawable/edittextstyle"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             >
 
         </Spinner>

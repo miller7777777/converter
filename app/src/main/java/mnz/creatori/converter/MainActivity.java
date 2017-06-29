@@ -2,6 +2,8 @@ package mnz.creatori.converter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -59,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
         String[] names = new String[valuteNames.size()];
         names = valuteNames.toArray(names);
 
-//        String[] names = {"none"};
-
-
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names);
@@ -70,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
         tvInfo = (TextView) findViewById(R.id.tv_info);
         tvFinishCurrencySum = (TextView) findViewById(R.id.tv_finish_currency_sum);
         etStartCurrencySum = (EditText) findViewById(R.id.et_start_currency_sum);
-        //TODO: сделать поле ввода активным
-        //TODO: Если names.lenght = 1, сделать поле неактивным
+
 
         currencyStartType = (Spinner) findViewById(R.id.et_start_currency_type);
         currencyFinishType = (Spinner) findViewById(R.id.et_finish_currency_type);
@@ -82,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 compute();
             }
         });
+        computeBtn.setEnabled(false);
 
         currencyStartType.setAdapter(adapter);
         currencyFinishType.setAdapter(adapter);
@@ -89,11 +88,35 @@ public class MainActivity extends AppCompatActivity {
         currencyStartType.setPrompt("Start Valute");
         currencyFinishType.setPrompt("Finish Valute");
 
+        etStartCurrencySum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                tvFinishCurrencySum.setText("?");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                if(etStartCurrencySum.getText().toString().length() > 0){
+                    computeBtn.setEnabled(true);
+                }else{
+                    computeBtn.setEnabled(false);
+                    tvFinishCurrencySum.setText("?");
+                }
+            }
+        });
+
         final String[] finalNames = names;
         currencyStartType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 valStart = finalNames[position];
             }
 
@@ -107,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         currencyFinishType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 valFinish = finalNames1[position];
 
             }
@@ -134,8 +157,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showMessage(String s) {
+    private void showMessage(String message) {
 
-        //TODO: написать метод showMessage()
+
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
+        //TODO: сделать SnackBar
     }
 }
