@@ -41,16 +41,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        networkHelper = new NetworkHelper();
-        db = new Database();
-//        valutes = networkHelper.getValutes();
+        networkHelper = new NetworkHelper(this);
+        db = new Database(this);
+        valutes = networkHelper.getValutes();
         valuteNames = networkHelper.getValuteNames();
         if(valuteNames.size() == 1){
             showMessage("Network error!");
+            valutes = db.getValutes();
             valuteNames = db.getValuteNames();
+        }else{
+            db.update(valutes);
+
         }
 
-        db.update(valuteNames);
 
         Collections.sort(valuteNames);
         String[] names = new String[valuteNames.size()];

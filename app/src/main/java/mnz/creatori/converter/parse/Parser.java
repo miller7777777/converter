@@ -58,6 +58,7 @@ public class Parser {
 
         }
 
+        valutes.add(new Valute("36", "643", "RUB", "1", "Российский Рубль", "1.0"));
         return valutes;
     }
 }

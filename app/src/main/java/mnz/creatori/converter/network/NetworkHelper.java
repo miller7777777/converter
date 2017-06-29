@@ -1,6 +1,7 @@
 package mnz.creatori.converter.network;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -14,23 +15,26 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import mnz.creatori.converter.Entity.Valute;
+import mnz.creatori.converter.MainActivity;
 import mnz.creatori.converter.databases.Database;
 import mnz.creatori.converter.parse.Parser;
 
 
 //осуществляет работу с сетью, загрузку данных
-public class NetworkHelper{
+public class NetworkHelper {
 
     private final String SOURCE_URL = "http://www.cbr.ru/scripts/XML_daily.asp";
     private final String TAG = "MyLogs";
     private String content;
     private ArrayList<Valute> valutes;
+    private ArrayList<String> valNames;
+    private Context context;
 
+    public NetworkHelper(Context context) {
+        this.context = context;
+    }
 
-
-
-
-    public ArrayList<String> getValuteNames() {
+    public ArrayList<Valute> getValutes() {
         //Метод должен гарантированно возвращать не null!
 
         DataLoader dataLoader = new DataLoader();
@@ -44,28 +48,30 @@ public class NetworkHelper{
         }
 
         valutes = new Parser().parse(content);
-        new Database().update(valutes);
+
+//        new Database(context).update(valutes);
 
 
-        ArrayList<String> valNames = new ArrayList<>();
+        return valutes;
+    }
+
+    public ArrayList<String> getValuteNames() {
+        valNames = new ArrayList<>();
+//        valutes = new Parser().parse(content);
+        valutes = getValutes();
 
         for (int i = 0; i < valutes.size(); i++) {
             valNames.add(valutes.get(i).getCharCode());
         }
 
 //        valNames.add("none");
+
         return valNames;
     }
 
 
-
-
-
-
-
-
     //Осуществляет загрузку данных с сайта
-    private class DataLoader extends AsyncTask<String, Void, String>{
+    private class DataLoader extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
@@ -83,7 +89,6 @@ public class NetworkHelper{
         protected void onPostExecute(String s) {
 
 
-
         }
 
         private String getContent(String path) throws IOException {
@@ -95,7 +100,6 @@ public class NetworkHelper{
                 c.setRequestProperty("Accept-Charset", "UTF-8");
                 c.setReadTimeout(10000);
                 c.connect();
-
 
 
                 reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "windows-1251"));
@@ -118,7 +122,6 @@ public class NetworkHelper{
         }
 
     }
-
 
 
 }
