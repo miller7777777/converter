@@ -3,6 +3,7 @@ package mnz.creatori.converter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         currencyStartType.setPrompt("Start Valute");
         currencyFinishType.setPrompt("Finish Valute");
 
+        etStartCurrencySum.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         etStartCurrencySum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
