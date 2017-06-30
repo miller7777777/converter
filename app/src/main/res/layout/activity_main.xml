@@ -95,7 +95,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:hint="\?"
-            android:lines="1"/>
+            android:lines="1"
+            android:textIsSelectable="true"/>
 
         <Spinner
             android:id="@+id/et_finish_currency_type"

@@ -3,6 +3,8 @@ package mnz.creatori.converter.logic;
 
 import android.util.Log;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import mnz.creatori.converter.Entity.Valute;
@@ -51,6 +53,8 @@ public class Calculator {
         int nominal1 = Integer.parseInt(valuteStart.getNominal());
         int nominal2 = Integer.parseInt(valuteFinish.getNominal());
         double sum2 = sum1 * value1 * nominal2/ (value2 * nominal1);
+
+        sum2 = new BigDecimal(sum2).setScale(4, RoundingMode.UP).doubleValue();
 
         try {
             return String.valueOf(sum2);
