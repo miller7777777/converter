@@ -35,11 +35,11 @@ public class Calculator {
 
         for (int i = 0; i < valutes.size(); i++) {
 
-            if(valutes.get(i).getCharCode().equals(valStart)){
+            if(valutes.get(i).getName().equals(valStart)){
                 valuteStart = valutes.get(i);
             }
 
-            if(valutes.get(i).getCharCode().equals(valFinish)){
+            if(valutes.get(i).getName().equals(valFinish)){
                 valuteFinish = valutes.get(i);
             }
 

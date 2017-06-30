@@ -41,7 +41,7 @@ public class Database {
         valutes = getValutes();
 
         for (int i = 0; i < valutes.size(); i++) {
-            valNames.add(valutes.get(i).getCharCode());
+            valNames.add(valutes.get(i).getName());
         }
 
         return valNames;
