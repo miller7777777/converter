@@ -1,22 +1,16 @@
 package mnz.creatori.converter.network;
 
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-
 import mnz.creatori.converter.Entity.Valute;
-import mnz.creatori.converter.MainActivity;
-import mnz.creatori.converter.databases.Database;
 import mnz.creatori.converter.parse.Parser;
 
 
@@ -41,7 +35,6 @@ public class NetworkHelper {
         dataLoader.execute(SOURCE_URL);
         try {
             content = dataLoader.get();
-//            Log.d(TAG, content);
 
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -49,22 +42,16 @@ public class NetworkHelper {
 
         valutes = new Parser().parse(content);
 
-//        new Database(context).update(valutes);
-
-
         return valutes;
     }
 
     public ArrayList<String> getValuteNames() {
         valNames = new ArrayList<>();
-//        valutes = new Parser().parse(content);
         valutes = getValutes();
 
         for (int i = 0; i < valutes.size(); i++) {
             valNames.add(valutes.get(i).getName());
         }
-
-//        valNames.add("none");
 
         return valNames;
     }
@@ -87,8 +74,6 @@ public class NetworkHelper {
 
         @Override
         protected void onPostExecute(String s) {
-
-
         }
 
         private String getContent(String path) throws IOException {
@@ -101,7 +86,6 @@ public class NetworkHelper {
                 c.setReadTimeout(10000);
                 c.connect();
 
-
                 reader = new BufferedReader(new InputStreamReader(c.getInputStream(), "windows-1251"));
                 StringBuilder buf = new StringBuilder();
                 String line = null;
@@ -110,7 +94,6 @@ public class NetworkHelper {
                 }
 
                 String answer = buf.toString();
-
 
                 Log.d(TAG, "String get: " + answer);
                 return (answer);
@@ -122,6 +105,4 @@ public class NetworkHelper {
         }
 
     }
-
-
 }

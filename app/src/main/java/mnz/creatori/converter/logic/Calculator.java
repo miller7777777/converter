@@ -1,15 +1,10 @@
 package mnz.creatori.converter.logic;
 
-
 import android.util.Log;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-
 import mnz.creatori.converter.Entity.Valute;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class Calculator {
 
@@ -30,10 +25,7 @@ public class Calculator {
 
         //метод должен гарантированно возвращать какой-то String
 
-
-
         Log.d("Calculator", "s = " + s + " valStart = " + valStart + " valFinish = " + valFinish);
-
 
         for (int i = 0; i < valutes.size(); i++) {
 
@@ -44,7 +36,6 @@ public class Calculator {
             if(valutes.get(i).getName().equals(valFinish)){
                 valuteFinish = valutes.get(i);
             }
-
         }
 
         double sum1 = Double.parseDouble(s);

@@ -24,7 +24,6 @@ import mnz.creatori.converter.network.NetworkHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String[] fakeData = {"one", "two", "three", "four", "five"};
     private TextView tvInfo;
     private TextView tvFinishCurrencySum;
     private EditText etStartCurrencySum;
@@ -48,21 +47,17 @@ public class MainActivity extends AppCompatActivity {
         db = new Database(this);
         valutes = networkHelper.getValutes();
         valuteNames = networkHelper.getValuteNames();
-        if(valuteNames.size() == 1){
+        if (valuteNames.size() == 1) {
             showMessage("Network error!");
             valutes = db.getValutes();
             valuteNames = db.getValuteNames();
-        }else{
+        } else {
             db.update(valutes);
-
         }
-
 
         Collections.sort(valuteNames);
         String[] names = new String[valuteNames.size()];
         names = valuteNames.toArray(names);
-
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,10 +66,9 @@ public class MainActivity extends AppCompatActivity {
         tvFinishCurrencySum = (TextView) findViewById(R.id.tv_finish_currency_sum);
         etStartCurrencySum = (EditText) findViewById(R.id.et_start_currency_sum);
 
-
         currencyStartType = (Spinner) findViewById(R.id.et_start_currency_type);
         currencyFinishType = (Spinner) findViewById(R.id.et_finish_currency_type);
-        computeBtn = (Button)findViewById(R.id.btn_compute);
+        computeBtn = (Button) findViewById(R.id.btn_compute);
         computeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         etStartCurrencySum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -105,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if(etStartCurrencySum.getText().toString().length() > 0){
+                if (etStartCurrencySum.getText().toString().length() > 0) {
                     computeBtn.setEnabled(true);
-                }else{
+                } else {
                     computeBtn.setEnabled(false);
                     tvFinishCurrencySum.setText("?");
                 }
@@ -124,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
@@ -134,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 //                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 valFinish = finalNames1[position];
-
             }
 
             @Override
@@ -142,29 +133,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
     }
 
     private void compute() {
 
-
         calculator = new Calculator(valutes);
 
         tvFinishCurrencySum.setText(calculator.getResult(etStartCurrencySum.getText().toString(), valStart, valFinish));
-
-
     }
 
     private void showMessage(String message) {
 
-
-
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
         //TODO: сделать SnackBar
     }
 }

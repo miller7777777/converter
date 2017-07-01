@@ -1,8 +1,6 @@
 package mnz.creatori.converter.parse;
 
-
 import java.util.ArrayList;
-
 import mnz.creatori.converter.Entity.Valute;
 
 //Объект класса принимает на вход строку, полученную от NetworkHelper и возвращает ArrayList<Valutes>.
@@ -18,11 +16,9 @@ public class Parser {
 
         while (result.contains("</Valute>")) {
 
-
             int t1 = result.indexOf("<Valute");
             int t2 = result.indexOf("</Valute>");
             String temp = result.substring(t1 + 8, t2);
-
 
             int t4 = temp.indexOf("ID=");
             int t5 = temp.indexOf(">");
@@ -50,12 +46,9 @@ public class Parser {
 
             valutes.add(new Valute(id, numCode, charCode, nominal, name, value));
 
-
             t2 = result.indexOf("</Valute>");
             String temp1 = result.substring(t2 + 9, result.length());
             result = temp1;
-
-
         }
 
         valutes.add(new Valute("36", "643", "RUB", "1", "Российский Рубль", "1.0"));

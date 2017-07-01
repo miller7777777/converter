@@ -1,24 +1,13 @@
 package mnz.creatori.converter.databases;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.view.View;
-
 import java.util.ArrayList;
-
 import mnz.creatori.converter.Entity.Valute;
-import mnz.creatori.converter.MainActivity;
-
-import static android.R.attr.id;
-import static android.R.attr.version;
-import static android.R.string.no;
-import static android.database.sqlite.SQLiteDatabase.CONFLICT_REPLACE;
 
 public class Database {
 
@@ -32,18 +21,14 @@ public class Database {
     }
 
     public ArrayList<String> getValuteNames() {
-
         //Метод должен гарантированно возвращать не null!
 
-
         valNames = new ArrayList<>();
-
         valutes = getValutes();
 
         for (int i = 0; i < valutes.size(); i++) {
             valNames.add(valutes.get(i).getName());
         }
-
         return valNames;
     }
 
@@ -62,8 +47,6 @@ public class Database {
             cv.put("name", valuteNames.get(i).getName());
             cv.put("value", valuteNames.get(i).getValue());
 
-//            long rowID = db.update("valutes", cv, null, null);
-
             int isUpdated = db.update("valutes",
                     cv,
                     "charCode = ?",
@@ -71,19 +54,11 @@ public class Database {
 
             Log.d("dbLogs", "isUpdated = " + isUpdated);
 
-
-
-
-
-
             if(isUpdated <= 0){
-
 
                 long isInserted = db.insertWithOnConflict("valutes", null, cv, SQLiteDatabase.CONFLICT_REPLACE);
                 Log.d("dbLogs", "isInserted = " + isInserted);
-
             }
-
         }
 
         db.setTransactionSuccessful();
@@ -91,7 +66,6 @@ public class Database {
 
         db.close();
         dbHelper.close();
-
     }
 
     public ArrayList<Valute> getValutes() {
@@ -99,7 +73,6 @@ public class Database {
         dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         valutes = new ArrayList<Valute>();
-
 
         Cursor cursor = db.query("valutes", null, null, null, null, null, null);
 
@@ -112,7 +85,6 @@ public class Database {
             int idColValue = cursor.getColumnIndex("value");
 
             do{
-
                 String id = cursor.getString(idColIndex);
                 String numCode = cursor.getString(idColNumCode);
                 String charCode = cursor.getString(idColCharCode);
@@ -123,15 +95,8 @@ public class Database {
                 Valute valute = new Valute(id, numCode, charCode, nominal, name, value);
                 valutes.add(valute);
 
-                Log.d("db_query", "Valute: " + id + " " + numCode + " " + charCode + " " + nominal + " " + name + " " + value);
-
             }while (cursor.moveToNext());
-        }else {
-            Log.d("db_query", "error reading from database");
         }
-
-        Log.d("db_query", "Считано из базы: " + valutes.size());
-
 
         cursor.close();
 
@@ -144,8 +109,6 @@ public class Database {
             super(context, "converterDB", null, 1);
         }
 
-
-
         @Override
         public void onCreate(SQLiteDatabase db) {
 
@@ -157,12 +120,10 @@ public class Database {
                     + "name text,"
                     + "value text"
                     + ");");
-
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
         }
     }
 }
