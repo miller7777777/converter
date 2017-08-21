@@ -4,19 +4,21 @@ import android.util.Log;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.List;
+
 import mnz.creatori.converter.Entity.Valute;
 
-public class Calculator {
+public class ExchangeCalculator {
 
     private String strSumFirst;
     private String strSumSecond;
     private String valStart;
     private String valFinish;
-    ArrayList<Valute> valutes;
+    private List<Valute> valutes;
     private Valute valuteStart;
     private Valute valuteFinish;
 
-    public Calculator(ArrayList<Valute> valutes) {
+    public ExchangeCalculator(List<Valute> valutes) {
 
         this.valutes = valutes;
     }
@@ -25,7 +27,6 @@ public class Calculator {
 
         //метод должен гарантированно возвращать какой-то String
 
-        Log.d("Calculator", "s = " + s + " valStart = " + valStart + " valFinish = " + valFinish);
 
         for (int i = 0; i < valutes.size(); i++) {
 

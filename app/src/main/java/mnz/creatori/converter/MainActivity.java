@@ -16,10 +16,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import mnz.creatori.converter.Entity.Valute;
 import mnz.creatori.converter.databases.Database;
-import mnz.creatori.converter.logic.Calculator;
+import mnz.creatori.converter.logic.ExchangeCalculator;
 import mnz.creatori.converter.network.NetworkHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private Spinner currencyFinishType;
     private Button computeBtn;
     private NetworkHelper networkHelper;
-    private ArrayList<Valute> valutes;
-    private ArrayList<String> valuteNames;
+    private List<Valute> valutes;
+    private List<String> valuteNames;
     private Database db;
-    private Calculator calculator;
+    private ExchangeCalculator exchangeCalculator;
     private String valStart;
     private String valFinish;
 
@@ -111,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         currencyStartType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 valStart = finalNames[position];
             }
 
@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         currencyFinishType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 valFinish = finalNames1[position];
             }
 
@@ -137,9 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void compute() {
 
-        calculator = new Calculator(valutes);
+        exchangeCalculator = new ExchangeCalculator(valutes);
 
-        tvFinishCurrencySum.setText(calculator.getResult(etStartCurrencySum.getText().toString(), valStart, valFinish));
+        tvFinishCurrencySum.setText(exchangeCalculator.getResult(etStartCurrencySum.getText().toString(), valStart, valFinish));
     }
 
     private void showMessage(String message) {

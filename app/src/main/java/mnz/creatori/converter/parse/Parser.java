@@ -1,12 +1,14 @@
 package mnz.creatori.converter.parse;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import mnz.creatori.converter.Entity.Valute;
 
 //Объект класса принимает на вход строку, полученную от NetworkHelper и возвращает ArrayList<Valutes>.
 public class Parser {
 
-    String path;
+
 
     ArrayList<Valute> valutes = new ArrayList<>();
 

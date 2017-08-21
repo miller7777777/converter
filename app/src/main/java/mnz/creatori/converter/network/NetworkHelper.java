@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import mnz.creatori.converter.Entity.Valute;
 import mnz.creatori.converter.parse.Parser;
@@ -20,15 +21,15 @@ public class NetworkHelper {
     private final String SOURCE_URL = "http://www.cbr.ru/scripts/XML_daily.asp";
     private final String TAG = "MyLogs";
     private String content;
-    private ArrayList<Valute> valutes;
-    private ArrayList<String> valNames;
+    private List<Valute> valutes;
+    private List<String> valNames;
     private Context context;
 
     public NetworkHelper(Context context) {
         this.context = context;
     }
 
-    public ArrayList<Valute> getValutes() {
+    public List<Valute> getValutes() {
         //Метод должен гарантированно возвращать не null!
 
         DataLoader dataLoader = new DataLoader();
@@ -45,7 +46,7 @@ public class NetworkHelper {
         return valutes;
     }
 
-    public ArrayList<String> getValuteNames() {
+    public List<String> getValuteNames() {
         valNames = new ArrayList<>();
         valutes = getValutes();
 

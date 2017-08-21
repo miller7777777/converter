@@ -7,20 +7,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import java.util.ArrayList;
+import java.util.List;
+
 import mnz.creatori.converter.Entity.Valute;
 
 public class Database {
 
     private DBHelper dbHelper;
     private Context context;
-    private ArrayList<Valute> valutes;
-    private ArrayList<String> valNames;
+    private List<Valute> valutes;
+    private List<String> valNames;
 
     public Database(Context context) {
         this.context = context;
     }
 
-    public ArrayList<String> getValuteNames() {
+    public List<String> getValuteNames() {
         //Метод должен гарантированно возвращать не null!
 
         valNames = new ArrayList<>();
@@ -32,7 +34,7 @@ public class Database {
         return valNames;
     }
 
-    public void update(ArrayList<Valute> valuteNames) {
+    public void update(List<Valute> valuteNames) {
         dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -68,7 +70,7 @@ public class Database {
         dbHelper.close();
     }
 
-    public ArrayList<Valute> getValutes() {
+    public List<Valute> getValutes() {
 
         dbHelper = new DBHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -103,7 +105,7 @@ public class Database {
         return valutes;
     }
 
-    class DBHelper extends SQLiteOpenHelper{
+    public class DBHelper extends SQLiteOpenHelper{
 
         public DBHelper(Context context) {
             super(context, "converterDB", null, 1);

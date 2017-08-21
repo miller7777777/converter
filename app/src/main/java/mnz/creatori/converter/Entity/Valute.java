@@ -65,3 +65,4 @@ public class Valute {
         this.value = value;
     }
 }
+
