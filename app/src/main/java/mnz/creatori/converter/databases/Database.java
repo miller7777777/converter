@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,12 +53,10 @@ public class Database {
                     "charCode = ?",
                     new String[] {valuteNames.get(i).getCharCode()});
 
-            Log.d("dbLogs", "isUpdated = " + isUpdated);
 
             if(isUpdated <= 0){
 
                 long isInserted = db.insertWithOnConflict("valutes", null, cv, SQLiteDatabase.CONFLICT_REPLACE);
-                Log.d("dbLogs", "isInserted = " + isInserted);
             }
         }
 

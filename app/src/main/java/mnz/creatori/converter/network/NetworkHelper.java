@@ -2,7 +2,6 @@ package mnz.creatori.converter.network;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +18,6 @@ import mnz.creatori.converter.parse.Parser;
 public class NetworkHelper {
 
     private final String SOURCE_URL = "http://www.cbr.ru/scripts/XML_daily.asp";
-    private final String TAG = "MyLogs";
     private String content;
     private List<Valute> valutes;
     private List<String> valNames;
@@ -96,7 +94,6 @@ public class NetworkHelper {
 
                 String answer = buf.toString();
 
-                Log.d(TAG, "String get: " + answer);
                 return (answer);
             } finally {
                 if (reader != null) {

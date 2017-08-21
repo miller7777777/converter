@@ -5,12 +5,10 @@ import java.util.List;
 
 import mnz.creatori.converter.Entity.Valute;
 
-//Объект класса принимает на вход строку, полученную от NetworkHelper и возвращает ArrayList<Valutes>.
 public class Parser {
 
 
-
-    List<Valute> valutes = new ArrayList<>();
+    private List<Valute> valutes = new ArrayList<>();
 
     public List<Valute> parse(String path){
 
