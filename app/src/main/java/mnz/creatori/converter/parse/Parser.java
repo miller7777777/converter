@@ -10,9 +10,9 @@ public class Parser {
 
 
 
-    ArrayList<Valute> valutes = new ArrayList<>();
+    List<Valute> valutes = new ArrayList<>();
 
-    public ArrayList<Valute> parse(String path){
+    public List<Valute> parse(String path){
 
         String result = path;
 
