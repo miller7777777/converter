@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Converter</string>
+    <string name="app_name">Converter_v_1.0.1</string>
     <string name="exchange_converter">Exchange Converter</string>
     <string name="compute">=</string>
     <string name="enter_start_sum">Enter start sum</string>
+    <string name="upd_info_text">Обновлено сегодня!</string>
+    <string name="data_updated">Данные обновлены:</string>
 </resources>

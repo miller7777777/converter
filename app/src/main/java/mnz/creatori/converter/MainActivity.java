@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import mnz.creatori.converter.Entity.Valute;
+import mnz.creatori.converter.SharPref.SharPrefHelper;
 import mnz.creatori.converter.databases.Database;
 import mnz.creatori.converter.logic.ExchangeCalculator;
 import mnz.creatori.converter.network.NetworkHelper;
@@ -27,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvInfo;
     private TextView tvFinishCurrencySum;
+    private TextView tvUpdInfo;
     private EditText etStartCurrencySum;
     private Spinner currencyStartType;
     private Spinner currencyFinishType;
     private Button computeBtn;
     private NetworkHelper networkHelper;
+    private SharPrefHelper sharPrefHelper;
     private List<Valute> valutes;
     private List<String> valuteNames;
     private Database db;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         networkHelper = new NetworkHelper(this);
         db = new Database(this);
+        sharPrefHelper = new SharPrefHelper(this);
         valutes = networkHelper.getValutes();
         valuteNames = networkHelper.getValuteNames();
         if (valuteNames.size() == 1) {
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             valuteNames = db.getValuteNames();
         } else {
             db.update(valutes);
+            sharPrefHelper.setUpdateDate();
         }
 
         Collections.sort(valuteNames);
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         tvInfo = (TextView) findViewById(R.id.tv_info);
+        tvUpdInfo = (TextView) findViewById(R.id.tv_upd_info);
         tvFinishCurrencySum = (TextView) findViewById(R.id.tv_finish_currency_sum);
         etStartCurrencySum = (EditText) findViewById(R.id.et_start_currency_sum);
 
@@ -77,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         computeBtn.setEnabled(false);
+        tvUpdInfo.setText(sharPrefHelper.getUpdateInfo());
 
         currencyStartType.setAdapter(adapter);
         currencyFinishType.setAdapter(adapter);
