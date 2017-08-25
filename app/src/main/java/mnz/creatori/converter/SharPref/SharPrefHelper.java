@@ -42,8 +42,6 @@ public class SharPrefHelper {
         time = sPref.getLong("last_update", 0L);
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z");
         String result = context.getString(R.string.data_updated) + "\n" +dateFormat.format(new java.util.Date(time));
-
-
         return result;
     }
 }
